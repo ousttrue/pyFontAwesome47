@@ -9,4 +9,7 @@ def get_path() -> pathlib.Path:
 
 
 def get_data() -> bytes:
-    return pkgutil.get_data('fontawesome47', DATA)
+    data = pkgutil.get_data('fontawesome47', DATA)
+    if not data:
+        raise Exception(f'{DATA} not found')
+    return data
