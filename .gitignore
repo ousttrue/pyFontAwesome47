@@ -1,0 +1,3 @@
+*.pyc
+*.egg-info
+src/fontawesome47/_version.py
