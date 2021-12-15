@@ -3,7 +3,7 @@ import pathlib
 HERE = pathlib.Path(__file__).absolute().parent
 
 
-def main(dst: pathlib.Path):
+def main(dst: pathlib.Path, is_bytes: bool):
     import fontawesome47.icons
 
     with dst.open('w') as w:
@@ -12,7 +12,12 @@ def main(dst: pathlib.Path):
             name = item["id"].replace('-', '_').upper()
             if name[0].isdigit():
                 name = '_' + name
-            w.write(f'{name} = chr(0x{unicode})\n')
+
+            if is_bytes:
+                w.write(f'{name} = b"\\u{unicode}"\n')
+            else:
+                w.write(f'{name} = "\\u{unicode}"\n')
 
 
-main(HERE/'src/fontawesome47/icons_str.py')
+main(HERE/'src/fontawesome47/icons_str.py', False)
+main(HERE/'src/fontawesome47/icons_bytes.py', True)
