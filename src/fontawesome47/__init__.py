@@ -13,3 +13,6 @@ def get_data() -> bytes:
     if not data:
         raise Exception(f'{DATA} not found')
     return data
+
+
+RANGE = (0xf000, 0xf3ff)
